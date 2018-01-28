@@ -1,7 +1,11 @@
 package itan.com.bluetoothle;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +39,42 @@ public abstract class BluetoothActivity extends AppCompatActivity {
 
     protected void onBackButtonClicked() {
         onBackPressed();
+    }
+
+    protected void showMsgText(int stringId) {
+        showMsgText(getString(stringId));
+    }
+
+    protected void showMsgText(String string) {
+        if (mToolbar != null) {
+            Snackbar snackbar = Snackbar.make(mToolbar, string, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+    }
+
+    protected BluetoothAdapter getBluetoothAdapter() {
+
+        BluetoothAdapter bluetoothAdapter;
+        BluetoothManager bluetoothService = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE));
+
+        if (bluetoothService != null) {
+
+            bluetoothAdapter = bluetoothService.getAdapter();
+
+            // Is Bluetooth supported on this device?
+            if (bluetoothAdapter != null) {
+
+                // Is Bluetooth turned on?
+                if (bluetoothAdapter.isEnabled()) {
+                    /*
+                    all the other Bluetooth initial checks already verified in MainActivity
+                     */
+                    return bluetoothAdapter;
+                }
+            }
+        }
+
+        return null;
     }
 
 
