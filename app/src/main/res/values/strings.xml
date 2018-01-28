@@ -3,4 +3,9 @@
     <string name="choose_app_role">Choose the app role:</string>
     <string name="button_role_peripheral">Peripheral/Server</string>
     <string name="button_role_central">Central/Client</string>
+    <string name="scan">scan</string>
+    <string name="advertise_device">Advertise Device</string>
+    <string name="notify">notify</string>
+    <string name="peripheral_screen">Peripheral/Server screen</string>
+    <string name="central_screen">Central/Client screen</string>
 </resources>
