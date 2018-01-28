@@ -1,5 +1,6 @@
 package itan.com.bluetoothle;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -55,9 +56,9 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
             case R.id.advertise_switch:
                 Switch switchToggle = (Switch) view;
                 if (switchToggle.isChecked()) {
-
+                    startAdvertising();
                 } else {
-
+                    stopAdvertising();
                 }
                 break;
 
@@ -68,6 +69,32 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     @Override
     protected int getTitleString() {
         return R.string.central_screen;
+    }
+
+
+    /**
+     * Starts BLE Advertising by starting {@code AdvertiserService}.
+     */
+    private void startAdvertising() {
+        // TODO - maybe bindService? what happens when closing app?
+        startService(getServiceIntent(this));
+    }
+
+
+    /**
+     * Stops BLE Advertising by stopping {@code AdvertiserService}.
+     */
+    private void stopAdvertising() {
+        stopService(getServiceIntent(this));
+        mSwitch.setChecked(false);
+    }
+
+
+    /**
+     * Returns Intent addressed to the {@code AdvertiserService} class.
+     */
+    private static Intent getServiceIntent(Context context) {
+        return new Intent(context, AdvertiserService.class);
     }
 
 }

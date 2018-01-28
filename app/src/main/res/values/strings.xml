@@ -18,5 +18,5 @@
     <string name="empty_list">No devices found - refresh to try again.</string>
     <string name="advertising_time_out">Advertising stopped due to timeout.</string>
     <string name="error_unknown">unknown error.</string>
-    <string name="connect_device">connect device</string>
+    <string name="connect_device">connect</string>
 </resources>

@@ -1,6 +1,8 @@
 package itan.com.bluetoothle;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
@@ -149,7 +151,7 @@ public class CentralRoleActivity extends BluetoothActivity implements View.OnCli
 
         ScanFilter.Builder builder = new ScanFilter.Builder();
         // Comment out the below line to see all BLE devices around you
-        //builder.setServiceUuid(Constants.Service_UUID);
+        //builder.setServiceUuid(Constants.SERVICE_UUID);
         scanFilters.add(builder.build());
 
         return scanFilters;
@@ -206,18 +208,40 @@ public class CentralRoleActivity extends BluetoothActivity implements View.OnCli
         public void onBatchScanResults(List<ScanResult> results) {
             super.onBatchScanResults(results);
             mDevicesAdapter.add(results);
+            logResults(results);
         }
 
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
             mDevicesAdapter.add(result);
+            logResults(result);
         }
 
         @Override
         public void onScanFailed(int errorCode) {
             super.onScanFailed(errorCode);
             showMsgText("Scan failed with error: " + errorCode);
+        }
+
+
+        private void logResults(List<ScanResult> results) {
+            if (results != null) {
+                for (ScanResult result : results) {
+                    logResults(result);
+                }
+            }
+        }
+
+        private void logResults(ScanResult result) {
+            if (result != null) {
+                BluetoothDevice device = result.getDevice();
+                if (device != null) {
+                    Log.v(MainActivity.TAG, device.getName() + " " + device.getAddress());
+                    return;
+                }
+            }
+            Log.e(MainActivity.TAG, "error SampleScanCallback");
         }
     }
 

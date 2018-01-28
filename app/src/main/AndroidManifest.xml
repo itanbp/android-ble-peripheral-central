@@ -38,6 +38,16 @@
 
         <activity android:name=".CentralRoleActivity"/>
 
+        <!--
+        Service to handle BLE Advertising - Using a service allows advertising to continue
+        when the app is no longer on screen in a reliable manner.
+        -->
+        <service
+            android:name=".AdvertiserService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+
     </application>
 
 </manifest>
