@@ -1,10 +1,15 @@
 package itan.com.bluetoothle;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private static final int REQUEST_ENABLE_BT = 1;
+    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 2;
 
 
     private Button mPeripheralButton;
@@ -52,27 +58,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (resultCode == RESULT_OK) {
 
-                    // Bluetooth is now Enabled, are Bluetooth Advertisements supported on
-                    // this device?
-                    if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
+                    initBT();
 
-                        enableNavigation();
-
-                    } else {
-
-                        // Bluetooth Advertisements are not supported.
-                        showErrorText(R.string.bt_ads_not_supported);
-                    }
                 } else {
 
                     // User declined to enable Bluetooth, exit the app.
-                    Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.bt_not_enabled, Toast.LENGTH_SHORT).show();
                 }
+                break;
 
             default:
                 super.onActivityResult(requestCode, resultCode, data);
+                break;
         }
     }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+
+        switch (requestCode) {
+
+            case PERMISSION_REQUEST_COARSE_LOCATION:
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    showErrorText(R.string.bt_not_permit_coarse);
+                } else {
+                    // Everything is supported and enabled.
+                    enableNavigation();
+                }
+            break;
+
+        }
+    }
+
 
     private void initBT() {
 
@@ -91,8 +109,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // Are Bluetooth Advertisements supported on this device?
                     if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
 
-                        // Everything is supported and enabled.
-                        enableNavigation();
+                        // see https://stackoverflow.com/a/37015725/1869297
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION);
+                            } else {
+                                // Everything is supported and enabled.
+                                enableNavigation();
+                            }
+
+                        } else {
+                            // Everything is supported and enabled.
+                            enableNavigation();
+                        }
+
 
                     } else {
 
