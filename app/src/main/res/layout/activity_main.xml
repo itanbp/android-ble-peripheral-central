@@ -30,7 +30,8 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:text="@string/button_role_peripheral"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+        android:enabled="false"/>
 
 
     <Button
@@ -39,7 +40,8 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:text="@string/button_role_central"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+        android:enabled="false"/>
 
 
 </LinearLayout>
