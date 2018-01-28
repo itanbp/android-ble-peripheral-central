@@ -41,5 +41,9 @@
         android:text="@string/button_role_central"
         android:layout_marginTop="32dp"/>
 
+    <!--
+    TEST
+    -->
+
 
 </LinearLayout>
