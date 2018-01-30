@@ -86,7 +86,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
                 break;
 
             case R.id.color_switch:
-                changeCharacteristic(mCharacteristicValueSwitch.isChecked() ? SERVER_MSG_SECOND_STATE : SERVER_MSG_FIRST_STATE);
+                setCharacteristic();
                 break;
 
             case R.id.button_notify:
@@ -133,7 +133,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     }
 
     private void setBluetoothService() {
-        
+
         // create the Service
         mSampleService = new BluetoothGattService(HEART_RATE_SERVICE_UUID, BluetoothGattService.SERVICE_TYPE_PRIMARY);
 
@@ -143,7 +143,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
         no need for notify permission as this is an action the Server initiate.
          */
         mSampleCharacteristic = new BluetoothGattCharacteristic(BODY_SENSOR_LOCATION_CHARACTERISTIC_UUID, BluetoothGattCharacteristic.PROPERTY_NOTIFY | BluetoothGattCharacteristic.PROPERTY_READ, BluetoothGattCharacteristic.PERMISSION_READ);
-        mSampleCharacteristic.setValue(getValue(SERVER_MSG_FIRST_STATE)); // set initial state
+        setCharacteristic(); // set initial state
 
         // add the Characteristic to the Service
         mSampleService.addCharacteristic(mSampleCharacteristic);
@@ -164,10 +164,11 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     value - can be between 0-255 according to:
     https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.body_sensor_location.xml
      */
-    private void changeCharacteristic(int value) {
+    private void setCharacteristic() {
         /*
-        done each time the user change a value of a Characteristic
+        done each time the user changes a value of a Characteristic
          */
+        int value = mCharacteristicValueSwitch.isChecked() ? SERVER_MSG_SECOND_STATE : SERVER_MSG_FIRST_STATE;
         mSampleCharacteristic.setValue(getValue(value));
     }
 
