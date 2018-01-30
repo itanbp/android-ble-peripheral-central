@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.ParcelUuid;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Created by itanbarpeled on 28/01/2018.
  */
 
-public class AdvertiserService extends Service {
+public class PeripheralAdvertiseService extends Service {
 
 
     /**
@@ -146,7 +147,8 @@ public class AdvertiserService extends Service {
          */
 
         AdvertiseData.Builder dataBuilder = new AdvertiseData.Builder();
-        dataBuilder.addServiceUuid(Constants.SERVICE_UUID);
+        //dataBuilder.addServiceUuid(Constants.SERVICE_UUID);
+        dataBuilder.addServiceUuid(ParcelUuid.fromString(Constants.HEART_RATE_SERVICE_UUID.toString()));
         dataBuilder.setIncludeDeviceName(true);
 
         /* For example - this will cause advertising to fail (exceeds size limit) */

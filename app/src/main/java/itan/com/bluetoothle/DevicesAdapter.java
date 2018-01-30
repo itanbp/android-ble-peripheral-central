@@ -18,11 +18,8 @@ import java.util.List;
 public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHolder>  {
 
 
-    private ArrayList<ScanResult> mArrayList;
-
-
-    public DevicesAdapter() {
-        mArrayList = new ArrayList<>();
+    public interface DevicesAdapterListener {
+        void onDeviceItemClick(String deviceName, String deviceAddress);
     }
 
 
@@ -40,6 +37,17 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
 
     }
 
+
+
+    private ArrayList<ScanResult> mArrayList;
+    private DevicesAdapterListener mListener;
+
+
+    public DevicesAdapter(DevicesAdapterListener listener) {
+        mArrayList = new ArrayList<>();
+        mListener = listener;
+    }
+
     public DevicesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_device_list, parent, false);
         return new ViewHolder(view);
@@ -49,8 +57,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         ScanResult scanResult = mArrayList.get(position);
-        String deviceName = scanResult.getDevice().getName();
-        String deviceAddress = scanResult.getDevice().getAddress();
+        final String deviceName = scanResult.getDevice().getName();
+        final String deviceAddress = scanResult.getDevice().getAddress();
 
         if (TextUtils.isEmpty(deviceName)) {
             holder.mDeviceNameView.setText("");
@@ -64,6 +72,16 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
             holder.mDeviceNameAddressView.setText(deviceAddress);
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TextUtils.isEmpty(deviceName) && !TextUtils.isEmpty(deviceAddress)) {
+                    if (mListener != null) {
+                        mListener.onDeviceItemClick(deviceName, deviceAddress);
+                    }
+                }
+            }
+        });
     }
 
     @Override

@@ -5,7 +5,7 @@
     <string name="button_role_central">Central/Client</string>
     <string name="scan">scan</string>
     <string name="advertise_device">Advertise Device</string>
-    <string name="notify">notify</string>
+    <string name="notify">Notify Client</string>
     <string name="peripheral_screen">Peripheral/Server screen</string>
     <string name="central_screen">Central/Client screen</string>
     <string name="bt_not_supported">Bluetooth is not supported on this device.</string>
@@ -17,6 +17,16 @@
     <string name="seconds">seconds.</string>
     <string name="empty_list">No devices found - refresh to try again.</string>
     <string name="advertising_time_out">Advertising stopped due to timeout.</string>
-    <string name="error_unknown">unknown error.</string>
+    <string name="error_unknown">Unknown error.</string>
     <string name="connect_device">connect</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="central_connection_screen">Central Connection screen</string>
+    <string name="connection_status_label">Connection Status</string>
+    <string name="connected_device_name_label">Connected Device Name</string>
+    <string name="server_characteristic_label">Server Characteristic value</string>
+    <string name="status_error_when_connecting">An error occurred when connecting to a device. Error Code</string>
+    <string name="choose_color">Choose color</string>
+    <string name="request_read_characteristic">Request Characteristic</string>
+    <string name="characteristic_value_received">Characteristic value received: %1$d</string>
 </resources>

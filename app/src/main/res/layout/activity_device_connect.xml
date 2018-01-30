@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itan.com.bluetoothle.PeripheralRoleActivity"
+    tools:context="itan.com.bluetoothle.DeviceConnectActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
@@ -16,61 +16,58 @@
         android:minHeight="?attr/actionBarSize"
         android:background="?attr/colorPrimary"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/advertise_device"
-        android:layout_marginTop="48dp"/>
-
-    <Switch
-        android:id="@+id/advertise_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:switchMinWidth="80dp"
-        android:layout_marginTop="24dp"/>
-
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/choose_color"
-        android:layout_marginTop="56dp"/>
+        android:text="@string/connected_device_name_label"
+        android:layout_marginTop="64dp"/>
 
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/connected_device_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="8dp"/>
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="#AD1457"
-            android:layout_marginStart="8dp"/>
 
-        <Switch
-            android:id="@+id/color_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchMinWidth="80dp"
-            android:layout_marginStart="8dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connection_status_label"
+        android:layout_marginTop="32dp"/>
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="#6A1B9A"/>
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/connection_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="-"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/server_characteristic_label"
+        android:layout_marginTop="32dp"/>
+
+
+    <ImageView
+        android:id="@+id/server_characteristic_value"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"/>
 
 
     <Button
-        android:id="@+id/button_notify"
+        android:id="@+id/request_read_characteristic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:text="@string/notify"
-        android:layout_marginTop="48dp"/>
+        android:text="@string/request_read_characteristic"
+        android:layout_marginTop="32dp"
+        android:enabled="false"/>
 
 
 </LinearLayout>

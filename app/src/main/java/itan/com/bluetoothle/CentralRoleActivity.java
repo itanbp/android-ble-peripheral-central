@@ -8,6 +8,7 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,13 +33,13 @@ import java.util.concurrent.TimeUnit;
     4. notify [peripheral]
     5. receive [central]
  */
-public class CentralRoleActivity extends BluetoothActivity implements View.OnClickListener {
+public class CentralRoleActivity extends BluetoothActivity implements View.OnClickListener, DevicesAdapter.DevicesAdapterListener {
 
 
     /**
-     * Stops scanning after 5 seconds.
+     * Stops scanning after 30 seconds.
      */
-    private static final long SCAN_PERIOD = 5000;
+    private static final long SCAN_PERIOD = 30000;
 
     private RecyclerView mDevicesRecycler;
     private DevicesAdapter mDevicesAdapter;
@@ -60,7 +61,7 @@ public class CentralRoleActivity extends BluetoothActivity implements View.OnCli
         mDevicesRecycler.setHasFixedSize(true);
         mDevicesRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        mDevicesAdapter = new DevicesAdapter();
+        mDevicesAdapter = new DevicesAdapter(this);
         mDevicesRecycler.setAdapter(mDevicesAdapter);
 
         mHandler = new Handler(Looper.getMainLooper());
@@ -89,7 +90,7 @@ public class CentralRoleActivity extends BluetoothActivity implements View.OnCli
 
     @Override
     protected int getTitleString() {
-        return R.string.peripheral_screen;
+        return R.string.central_screen;
     }
 
 
@@ -198,6 +199,19 @@ public class CentralRoleActivity extends BluetoothActivity implements View.OnCli
 
         showMsgText(R.string.error_unknown);
     }
+
+
+    @Override
+    public void onDeviceItemClick(String deviceName, String deviceAddress) {
+
+        //stopScanning();
+
+        Intent intent = new Intent(this, DeviceConnectActivity.class);
+        intent.putExtra(DeviceConnectActivity.EXTRAS_DEVICE_NAME, deviceName);
+        intent.putExtra(DeviceConnectActivity.EXTRAS_DEVICE_ADDRESS, deviceAddress);
+        startActivity(intent);
+    }
+
 
     /**
      * Custom ScanCallback object - adds to adapter on success, displays error on failure.
