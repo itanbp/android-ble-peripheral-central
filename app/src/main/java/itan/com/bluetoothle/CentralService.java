@@ -120,10 +120,10 @@ public class CentralService extends Service {
 
             if ((flag & 0x01) != 0) {
                 format = BluetoothGattCharacteristic.FORMAT_UINT16;
-                Log.d(MainActivity.TAG, "Heart rate format UINT16.");
+                Log.d(MainActivity.TAG, "data format UINT16.");
             } else {
                 format = BluetoothGattCharacteristic.FORMAT_UINT8;
-                Log.d(MainActivity.TAG, "Heart rate format UINT16.");
+                Log.d(MainActivity.TAG, "data format UINT16.");
             }
 
             int msg = characteristic.getIntValue(format, 0);

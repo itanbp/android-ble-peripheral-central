@@ -15,34 +15,18 @@ public class Constants {
     public static final int SERVER_MSG_FIRST_STATE = 1;
     public static final int SERVER_MSG_SECOND_STATE = 2;
 
-
-    /**
-     * UUID identified with this app - set as Service UUID for BLE Advertisements.
-     *
-     * Bluetooth requires a certain format for UUIDs associated with Services.
-     * The official specification can be found here:
-     * @link https://www.bluetooth.org/en-us/specification/assigned-numbers/service-discovery
-     */
-    //public static final ParcelUuid SERVICE_UUID = ParcelUuid.fromString(UUID_STR);
-    //private static final String UUID_STR = "0000b81d-0000-1000-8000-00805f9b34fb";
-
-
     /*
-    public static final UUID HEART_RATE_MEASUREMENT_UUID = UUID.fromString("00002A37-0000-1000-8000-00805f9b34fb");
-    public static final int HEART_RATE_MEASUREMENT_VALUE_FORMAT = BluetoothGattCharacteristic.FORMAT_UINT8;
-    public static final UUID CHARACTERISTIC_USER_DESCRIPTION_UUID = UUID.fromString("00002901-0000-1000-8000-00805f9b34fb");
-    public static final UUID CLIENT_CHARACTERISTIC_CONFIGURATION_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
-    */
+    TODO bluetooth
+    better to use different Bluetooth Service,
+    instead of Heart Rate Service:
+    https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.heart_rate.xml.
 
+    maybe Object Transfer Service is more suitable:
+    https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.object_transfer.xml
+     */
     public static final UUID HEART_RATE_SERVICE_UUID = UUID.fromString("0000180D-0000-1000-8000-00805f9b34fb");
     public static final UUID BODY_SENSOR_LOCATION_CHARACTERISTIC_UUID = UUID.fromString("00002A38-0000-1000-8000-00805f9b34fb");
 
-
-    // from LEGatt
-    /*
-    public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
-    public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
-    */
 
 
 
