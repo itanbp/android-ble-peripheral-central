@@ -74,10 +74,16 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
             mConnectedDeviceName.setText(mDeviceName);
         }
 
+
         Intent gattServiceIntent = new Intent(this, CentralService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-    }
 
+        /*
+        updateConnectionState(R.string.connected);
+        mRequestReadCharacteristic.setEnabled(true);
+        updateInputFromServer(SERVER_MSG_SECOND_STATE);
+        */
+    }
 
 
     @Override
@@ -100,7 +106,6 @@ public class DeviceConnectActivity extends BluetoothActivity implements View.OnC
         unbindService(mServiceConnection);
         mBluetoothLeService = null;
     }
-
 
     @Override
     protected int getLayoutId() {

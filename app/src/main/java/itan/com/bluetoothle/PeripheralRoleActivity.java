@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import java.util.Arrays;
@@ -45,7 +46,7 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
 
     private Button mNotifyButton;
     private Switch mEnableAdvertisementSwitch;
-    private Switch mCharacteristicValueSwitch;
+    private RadioGroup mCharacteristicValueSwitch;
 
 
 
@@ -55,11 +56,17 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
 
         mNotifyButton = (Button) findViewById(R.id.button_notify);
         mEnableAdvertisementSwitch = (Switch) findViewById(R.id.advertise_switch);
-        mCharacteristicValueSwitch = (Switch) findViewById(R.id.color_switch);
+        mCharacteristicValueSwitch = (RadioGroup) findViewById(R.id.color_switch);
+
 
         mNotifyButton.setOnClickListener(this);
         mEnableAdvertisementSwitch.setOnClickListener(this);
-        mCharacteristicValueSwitch.setOnClickListener(this);
+        mCharacteristicValueSwitch.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                setCharacteristic(checkedId);
+            }
+        });
 
         setGattServer();
         setBluetoothService();
@@ -85,9 +92,6 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
                 }
                 break;
 
-            case R.id.color_switch:
-                setCharacteristic();
-                break;
 
             case R.id.button_notify:
                 notifyCharacteristicChanged();
@@ -155,6 +159,10 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     }
 
 
+    private void setCharacteristic() {
+        setCharacteristic(R.id.color_option_1);
+    }
+
     /*
     update the value of Characteristic.
     the client will receive the Characteristic value when:
@@ -164,11 +172,11 @@ public class PeripheralRoleActivity extends BluetoothActivity implements View.On
     value - can be between 0-255 according to:
     https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.body_sensor_location.xml
      */
-    private void setCharacteristic() {
+    private void setCharacteristic(int checkedId) {
         /*
         done each time the user changes a value of a Characteristic
          */
-        int value = mCharacteristicValueSwitch.isChecked() ? SERVER_MSG_SECOND_STATE : SERVER_MSG_FIRST_STATE;
+        int value = checkedId == R.id.color_option_1 ? SERVER_MSG_FIRST_STATE : SERVER_MSG_SECOND_STATE;
         mSampleCharacteristic.setValue(getValue(value));
     }
 

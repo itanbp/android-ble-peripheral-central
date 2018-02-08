@@ -1,5 +1,6 @@
 package itan.com.bluetoothle;
 
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.ScanResult;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -22,6 +23,17 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
         void onDeviceItemClick(String deviceName, String deviceAddress);
     }
 
+    /*
+    class Temp {
+        String name;
+        String address;
+
+        public Temp(String name, String address) {
+            this.name = name;
+            this.address = address;
+        }
+    }
+    */
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -37,8 +49,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
 
     }
 
-
-
+    //private ArrayList<Temp> mArrayList;
     private ArrayList<ScanResult> mArrayList;
     private DevicesAdapterListener mListener;
 
@@ -46,6 +57,14 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
     public DevicesAdapter(DevicesAdapterListener listener) {
         mArrayList = new ArrayList<>();
         mListener = listener;
+
+        /*
+        Temp device = new Temp("Pixel", "AA:12:AA:12:AA:12");
+        mArrayList.add(device);
+        device = new Temp("Galaxy S8", "BB:23:BB:23:BB:23");
+        mArrayList.add(device);
+        notifyDataSetChanged();
+        */
     }
 
     public DevicesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -59,6 +78,12 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
         ScanResult scanResult = mArrayList.get(position);
         final String deviceName = scanResult.getDevice().getName();
         final String deviceAddress = scanResult.getDevice().getAddress();
+
+        /*
+        Temp scanResult = mArrayList.get(position);
+        final String deviceName = scanResult.name;
+        final String deviceAddress = scanResult.address;
+        */
 
         if (TextUtils.isEmpty(deviceName)) {
             holder.mDeviceNameView.setText("");
@@ -88,7 +113,6 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
     public int getItemCount() {
         return mArrayList.size();
     }
-
 
     public void add(ScanResult scanResult) {
         add(scanResult, true);
@@ -120,7 +144,6 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
 
     }
 
-
     public void add(List<ScanResult> scanResults) {
         if (scanResults != null) {
             for (ScanResult scanResult : scanResults) {
@@ -144,7 +167,6 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
         }
         return position;
     }
-
 
 
 }

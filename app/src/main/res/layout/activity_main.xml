@@ -31,7 +31,10 @@
         android:textColor="@android:color/white"
         android:text="@string/button_role_peripheral"
         android:layout_marginTop="32dp"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:background="#BDBDBD"
+        android:padding="8dp"
+        android:elevation="4dp"/>
 
 
     <Button
@@ -41,7 +44,10 @@
         android:textColor="@android:color/white"
         android:text="@string/button_role_central"
         android:layout_marginTop="32dp"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:background="#BDBDBD"
+        android:padding="8dp"
+        android:elevation="4dp"/>
 
 
 </LinearLayout>

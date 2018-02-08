@@ -29,39 +29,32 @@
         android:switchMinWidth="80dp"
         android:layout_marginTop="24dp"/>
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_color"
         android:layout_marginTop="56dp"/>
 
-
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/color_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="24dp">
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="#AD1457"
-            android:layout_marginStart="8dp"/>
-
-        <Switch
-            android:id="@+id/color_switch"
+        <RadioButton
+            android:id="@+id/color_option_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:switchMinWidth="80dp"
-            android:layout_marginStart="8dp" />
+            android:drawableEnd="@drawable/color_option_1"
+            android:checked="true"/>
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="#6A1B9A"/>
+        <RadioButton
+            android:id="@+id/color_option_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/color_option_2"/>
 
-    </LinearLayout>
+    </RadioGroup>
 
 
     <Button
@@ -70,7 +63,10 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:text="@string/notify"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="48dp"
+        android:background="#BDBDBD"
+        android:padding="8dp"
+        android:elevation="4dp"/>
 
 
 </LinearLayout>
